@@ -1,0 +1,169 @@
+.container {
+	background-color: #fff;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	max-width: 100%;
+    height: 100vh;
+}
+
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+}
+
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
+.form-container input {
+    background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 70%;
+}
+
+.form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
+.form span {
+	font-size: 12px;
+}
+
+.form-input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 70%;
+}
+
+input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+.social-container {
+	margin: 20px 0;
+}
+
+.social-container a {
+    color: black;
+	border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 40px;
+	width: 40px;
+}
+
+button {
+	border-radius: 20px;
+	border: 1px solid #38AB96;
+	background-color: #38AB96;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+.btn__auth {
+	background-color: transparent;
+    border-color: #FFFFFF;    
+}
+
+.btn__auth a {
+    color: #FFFFFF;
+}
+
+.form__error-signup {
+	color: #f9656b;
+	margin: 10px;
+}
+
+.error {
+	border: 1px solid #f9656b !important;
+	background: #fae7e7 !important;
+}
+
+.sign-in-container {
+	left: 50%;
+	width: 50%;
+	z-index: 2;
+}
+
+.sign-up-container {
+	left: 0;
+	width: 50%;
+	z-index: 3;
+}
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 100;
+}
+
+.overlay {
+	background: #36AF8C;
+	background: -webkit-linear-gradient(to right, #36AF8C, #38A2A9);
+	background: linear-gradient(to right, #36AF8C, #38A2A9);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	position: relative;
+	height: 100%;
+	width: 200%;
+}
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;	
+	height: 100%;
+	width: 50%;
+}
