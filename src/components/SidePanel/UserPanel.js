@@ -33,26 +33,6 @@ class UserPanel extends Component {
     render() {
         const { user } = this.state;
         return (
-            // <Grid style={{ background: '#4c3c4c' }}>
-            //     <Grid.Column>
-            //         <Grid.Row style={{ padding: '1.2em', margin: '0' }}>
-            //             <Header inverted fixed="left" as="h2">
-            //                 <Icon name="code"/>
-            //                 DevChat
-            //             </Header>
-            //         </Grid.Row>
-            //         <Header inverted fixed="left" as="h4" style={{ padding: '1.5em', margin: '0' }}>
-            //             <Dropdown 
-            //                 trigger={
-            //                     <span>
-            //                         <Image src={user.photoURL} spaced="right" avatar/>
-            //                         {user.displayName}
-            //                     </span>
-            //                 } 
-            //                 options={this.dropdownOprions()}/>
-            //         </Header>
-            //     </Grid.Column>
-            // </Grid>
             <div className="user-panel">
                 <h1 className="user-panel__title">DevChat</h1>
                 <Dropdown 

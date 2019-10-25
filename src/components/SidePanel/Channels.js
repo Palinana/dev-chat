@@ -14,6 +14,18 @@ class Channels extends Component {
         channelsRef: firebase.database().ref('channels')
     }
 
+    componentDidMount() {
+        this.addListeners();
+    }
+
+    addListeners = () => {
+        let loadedChannels = [];
+        this.state.channelsRef.on('child_added', snap => {
+            loadedChannels.push(snap.val());
+            this.setState({ channels: loadedChannels });
+        });
+    }
+
     openModal = () => this.setState({ modal: true });
 
     closeModal = () => this.setState({ modal: false });
@@ -70,10 +82,21 @@ class Channels extends Component {
                         <i class="fa fa-plus" onClick={this.openModal}></i>
                     </div>
                     
-                    <ul>
-                        <li>
-                            
-                        </li>
+                    <ul className="channel">
+                        {
+                            channels.length && channels.map((channel, ind) => {
+                                return (
+                                    <li 
+                                        className="channel__name"
+                                        key={ind}
+                                        onClick={() => console.log(channel)}
+                                    >
+                                    # {channel.name}
+                                    </li>
+                                )
+                            })
+                        }
+                        
                     </ul>
                 </div>
                 

@@ -10,9 +10,6 @@ class SidePanel extends Component {
         const { currentUser } = this.props;
 
         return (
-            // <Menu size="large" inverted fixed="left" vertical style={{ background: '#4c3c4c' }}>
-            //     <UserPanel currentUser={currentUser}/>
-            // </Menu>
             <div className="side-panel">
                 <UserPanel currentUser={currentUser}/>
                 <Channels currentUser={currentUser}/>

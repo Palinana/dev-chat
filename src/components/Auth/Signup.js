@@ -120,7 +120,7 @@ class Signup extends Component {
                 </div>
                 
                 <div className="form-container sign-up-container">
-                    <form action="#" onSubmit={this.handleSubmit}>
+                    <form className="form" onSubmit={this.handleSubmit}>
                         <h1>Create Account</h1>
                         <div className="social-container">
                             <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>

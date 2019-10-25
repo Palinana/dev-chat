@@ -10,13 +10,6 @@ import Messages from '../Messages/Messages';
 import './Chat.css';
 
 const Chat = ({ currentUser }) => (
-    // <Grid columns="equal" className="chat">
-    //     <ColorPanel />
-    //     <SidePanel currentUser={currentUser}/>
-    //     <Grid.Column style={{marginLeft: 320}}>
-    //         <Messages />
-    //     </Grid.Column>
-    // </Grid>
     <div className="chat">
         <ColorPanel />
         <SidePanel currentUser={currentUser}/>
