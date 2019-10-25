@@ -114,7 +114,7 @@ class Signup extends Component {
                         <div className="overlay-panel overlay-right">
                             <h1 className="overlay__title">Welcome Back!</h1>
                             <p>To keep connected with us please login with your personal info</p>
-                            <button className="btn__auth" id="signIn"><Link to="/login">Login</Link></button>
+                            <Link to="/login"><button className="btn__auth" id="signIn">Login</button></Link>
                         </div>
                     </div>
                 </div>

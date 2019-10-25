@@ -1,0 +1,12 @@
+.channels {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3rem;
+}
+
+.channels__title {
+    padding: 1.5rem 1rem;
+    margin-right: auto;
+}
