@@ -114,13 +114,13 @@ class Signup extends Component {
                         <div className="overlay-panel overlay-right">
                             <h1 className="overlay__title">Welcome Back!</h1>
                             <p>To keep connected with us please login with your personal info</p>
-                            <button className="btn__auth" id="signIn"><Link to="/login">Login</Link></button>
+                            <Link to="/login"><button className="btn__auth" id="signIn">Login</button></Link>
                         </div>
                     </div>
                 </div>
                 
                 <div className="form-container sign-up-container">
-                    <form action="#" onSubmit={this.handleSubmit}>
+                    <form className="form" onSubmit={this.handleSubmit}>
                         <h1>Create Account</h1>
                         <div className="social-container">
                             <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -165,7 +165,7 @@ class Signup extends Component {
                                 {this.displayErrors(errors)}
                             </div>
                         )}
-                        <button>Sign Up</button>
+                        <button id="signup">Sign Up</button>
                     </form>
                 </div>        
             </div>

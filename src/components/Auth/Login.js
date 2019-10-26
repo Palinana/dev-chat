@@ -90,7 +90,7 @@ class Login extends Component {
                         <div className="overlay-panel overlay-left">
                             <h1>Hello, Friend!</h1>
                             <p>Enter your personal details and start journey with us</p>
-                            <button className="btn__auth" id="signUp"><Link to="/signup">Sign Up</Link></button>
+                            <Link to="/signup"><button className="btn__auth" id="signUp">Sign Up</button></Link>
                         </div>
                     </div>
                 </div>

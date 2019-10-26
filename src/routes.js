@@ -7,7 +7,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Spinner from './components/UI/Spinner';
 
-import { setUser, clearUser } from './store'
+import { setUser, clearUser } from './store';
 import firebase from './firebase';
 
 class Routes extends Component {

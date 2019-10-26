@@ -1,0 +1,32 @@
+.channels {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3rem;
+}
+
+.channels__title {
+    padding: 1.5rem 1rem;
+    margin-right: auto;
+}
+
+.channel {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel__name{
+    list-style: none;
+    opacity: 0.7;
+    padding: .5rem 3rem;
+}
+
+.channel__name:hover {
+    background: rgba(251, 251, 251, 0.2);
+}
+
+.channel--active {
+    background: rgba(251, 251, 251, 0.2);
+    opacity: 1;
+}

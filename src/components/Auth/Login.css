@@ -1,7 +1,5 @@
 .container {
 	background-color: #fff;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
 	max-width: 100%;
@@ -20,7 +18,7 @@ form {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 50px;
+	padding: 0 5rem;
 	height: 100%;
 	text-align: center;
 }
@@ -28,16 +26,16 @@ form {
 .form-container input {
     background-color: #eee;
 	border: none;
-	padding: 12px 15px;
-	margin: 8px 0;
+	padding: 1.1rem 1.5rem;
+	margin: .7rem 0;
 	width: 100%;
 }
 
 .form-input {
 	background-color: #eee;
 	border: none;
-	padding: 12px 15px;
-	margin: 8px 0;
+	padding: 1.1rem 1.5rem;
+	margin: .7rem 0;
 	width: 70%;
 }
 
@@ -45,16 +43,16 @@ input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
-	margin: 8px 0;
+	margin: .7rem 0;
 	width: 70%;
 }
 
 .form span {
-	font-size: 12px;
+	font-size: 1.2rem;
 }
 
 .social-container {
-	margin: 20px 0;
+	margin: 2rem 0;
 }
 
 .social-container a {
@@ -87,7 +85,7 @@ input {
 
 .link__password {
     color: #49a6d4;
-    margin: 15px 0;
+    margin: 2rem 0;
 }
 
 button {
@@ -97,7 +95,7 @@ button {
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
-	padding: 12px 45px;
+	padding: 1.2rem 4.5rem;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
@@ -155,7 +153,7 @@ button:focus {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 40px;
+	padding: 0 4rem;
 	text-align: center;
 	top: 0;
 	height: 100%;

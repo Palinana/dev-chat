@@ -1,0 +1,13 @@
+.user-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-panel__title {
+    align-self: center;
+    padding: 1rem 1rem;
+}
+
+.user-panel__toggle{
+    padding: 0rem 3rem 2rem;
+}

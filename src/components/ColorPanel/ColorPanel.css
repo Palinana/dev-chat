@@ -1,0 +1,18 @@
+.color-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 7%;
+    background: #484848;
+    color: white;
+
+    /* background: linear-gradient(to bottom, #36AF8C, #38A2A9); */
+}
+
+.color-panel__btn {
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid white;
+    padding: 1.2rem 1.8rem;
+    margin: 1.5rem;
+}

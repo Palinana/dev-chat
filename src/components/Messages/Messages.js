@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
+import './Messages.css';
+
 class Messages extends Component {
     render() {
         return (
-            <div>Messages</div>
+            <div className="messages">Messages</div>
         )
     }
 }
