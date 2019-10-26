@@ -165,7 +165,7 @@ class Signup extends Component {
                                 {this.displayErrors(errors)}
                             </div>
                         )}
-                        <button>Sign Up</button>
+                        <button id="signup">Sign Up</button>
                     </form>
                 </div>        
             </div>

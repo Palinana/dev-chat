@@ -1,29 +1,52 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Modal, Form, Input, Icon, Button } from 'semantic-ui-react';
 import firebase from '../../firebase';
+
+import { setCurrentChannel } from '../../store';
 
 import './Channels.css';
 
 class Channels extends Component {
     state = {
         user: this.props.currentUser,
+        activeChannel: '',
         channels: [],
         channelName: '',
         channelDetails: '',
         modal: false,
-        channelsRef: firebase.database().ref('channels')
+        channelsRef: firebase.database().ref('channels'),
+        firstLoad: true
     }
 
     componentDidMount() {
         this.addListeners();
     }
 
+    componentWillMount() {
+        this.removeListners();
+    }
+
     addListeners = () => {
         let loadedChannels = [];
         this.state.channelsRef.on('child_added', snap => {
             loadedChannels.push(snap.val());
-            this.setState({ channels: loadedChannels });
+            this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
         });
+    }
+
+    setFirstChannel = () => {
+        const firstChannel = this.state.channels[0];
+
+        if(this.state.firstLoad && this.state.channels.length > 0) {
+            this.props.setCurrentChannel(firstChannel);
+            this.setActiveChannel(firstChannel);
+        }
+        this.setState({ firstLoad: false });
+    }
+
+    removeListners = () => {
+        this.state.channelsRef.off();
     }
 
     openModal = () => this.setState({ modal: true });
@@ -57,6 +80,15 @@ class Channels extends Component {
             })
     }
 
+    changeChannel = channel => {
+        this.setActiveChannel(channel)
+        this.props.setCurrentChannel(channel);
+    }
+
+    setActiveChannel = channel => {
+        this.setState({ activeChannel: channel.id });
+    }
+
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -72,14 +104,13 @@ class Channels extends Component {
 
     render() {
         const { channels, modal } = this.state;
-
         return (
             <React.Fragment>
                 <div>
                     <div className="channels">
-                        <i class="fa fa-exchange" aria-hidden="true"></i>
+                        <i className="fa fa-exchange" aria-hidden="true"></i>
                         <span className="channels__title">CHANNELS ({channels.length})</span>
-                        <i class="fa fa-plus" onClick={this.openModal}></i>
+                        <i className="fa fa-plus" onClick={this.openModal}></i>
                     </div>
                     
                     <ul className="channel">
@@ -87,16 +118,20 @@ class Channels extends Component {
                             channels.length && channels.map((channel, ind) => {
                                 return (
                                     <li 
-                                        className="channel__name"
+                                        // className="channel__name"
+                                        className={
+                                            channel.id === this.state.activeChannel 
+                                            ? "channel--active channel__name"
+                                            : "channel__name"
+                                        }
                                         key={ind}
-                                        onClick={() => console.log(channel)}
+                                        onClick={() => this.changeChannel(channel)}
                                     >
                                     # {channel.name}
                                     </li>
                                 )
                             })
                         }
-                        
                     </ul>
                 </div>
                 
@@ -121,8 +156,6 @@ class Channels extends Component {
                                         onChange={this.handleChange}
                                         />
                                 </Form.Field>
-
-
                             </Form>
                         </Modal.Content>
                         
@@ -135,10 +168,17 @@ class Channels extends Component {
                             </Button>
                         </Modal.Actions>
                     </Modal>
-                
             </React.Fragment>
         )
     }
 }
+
+const mapDispatch = dispatch => {
+    return {
+        setCurrentChannel(channel) {
+            dispatch(setCurrentChannel(channel));
+        }
+    }
+}
   
-export default Channels;
+export default connect(null, mapDispatch)(Channels);

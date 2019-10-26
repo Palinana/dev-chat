@@ -14,11 +14,19 @@
 .channel {
     display: flex;
     flex-direction: column;
-    margin: 0 3rem;
 }
 
 .channel__name{
     list-style: none;
     opacity: 0.7;
-    padding: .5rem 0;
+    padding: .5rem 3rem;
+}
+
+.channel__name:hover {
+    background: rgba(251, 251, 251, 0.2);
+}
+
+.channel--active {
+    background: rgba(251, 251, 251, 0.2);
+    opacity: 1;
 }
