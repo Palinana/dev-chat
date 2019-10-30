@@ -32,8 +32,9 @@ export default function(state = initialChannelState, action){
     switch (action.type) {
         case SET_CURRENT_CHANNEL:
             return {
-              ...action.channel
-            }
+                ...state,
+                currentChannel: action.channel
+            };
         default:
             return state
     }

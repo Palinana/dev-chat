@@ -81,7 +81,7 @@ class Login extends Component {
                             </div>
                         )}
                         <a href="#" className="link__password">Forgot your password?</a>
-                        <button>Login</button>
+                        <button className="btn__auth--main">Login</button>
                     </form>
                 </div>
 

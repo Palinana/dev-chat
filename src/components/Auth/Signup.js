@@ -165,7 +165,7 @@ class Signup extends Component {
                                 {this.displayErrors(errors)}
                             </div>
                         )}
-                        <button id="signup">Sign Up</button>
+                        <button className="btn__auth--main" id="signup">Sign Up</button>
                     </form>
                 </div>        
             </div>
