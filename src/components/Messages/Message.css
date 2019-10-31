@@ -27,17 +27,17 @@
   
 .message--self .message__details-text {
     background: #36AF8C;
-      color: white;
-      border-radius: 14px 14px 0 14px;
+    color: white;
+    border-radius: 14px 0 14px 14px;
 }
   
 .message--other .message__details-text {
     background: white;
-      color: black;
-      border-radius: 14px 14px 14px 0;
+    color: black;
+    border-radius: 0 14px 14px 14px;
 }
   
-.message__image{
+.message__image {
     min-width: 48px;
     margin-right: 10px;
 }
@@ -50,7 +50,7 @@
   
 .message__details-text{
     padding: 9px 14px;
-    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .message__details-info {
@@ -58,17 +58,28 @@
     flex-direction: row;
 }
 
-.info--self .message__details-time{
-    margin-left: 15px;
+.message__details-name {
+    font-weight: 500;
+}
+
+.message__details-time {
+    font-weight: 200;
     color: grey;
 }
 
-.info--other .message__details-name{
+.info--self .message__details-time {
+    margin-left: 15px;
+}
+
+.info--other .message__details-name {
     order: 2;
 }
 
-.info--other .message__details-time{
-    color: grey;
+.info--other .message__details-time {
     margin-right: 15px;
     order: 1;
+}
+
+.message__details-image {
+    
 }

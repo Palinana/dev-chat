@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 3rem;
+    padding: 0 2rem;
     height: 100%;
     text-align: center;
 }
@@ -22,16 +22,18 @@
     width: 100%;
 }
 
-.reply__input {
-
-}
-
-.reply__btn {
-    margin: 0 .5rem;
+.reply__attach {
+    margin-right: 1rem;
     border: none
 }
 
-.reply__btn--submit-image {
+.reply__btn {
+    margin-left: 1rem;
+    border: none
+}
+
+.reply__btn--submit-image,
+.reply__attach-image {
     height: 2rem;
     width: 2rem;
 }
