@@ -17,6 +17,10 @@ const isImage = (message) => {
     return message.hasOwnProperty('image') && !message.hasOwnProperty('content');
 }
 
+const userImage = (message, user) => {
+    return message.user.id === user.uid ? 'message__details-image image--self' : 'message__details-image image--other'
+}
+
 const Message = ({ message, user }) => { 
     return (
           <div className={isOwnMessage(message, user)}>
@@ -37,7 +41,9 @@ const Message = ({ message, user }) => {
                     </div> 
                     
                     { isImage(message) ? 
-                        <img src={message.image} className="message__details-image"/> :
+                        <div className={userImage(message, user)}>
+                            <img src={message.image} />
+                        </div> :
                         <div className="message__details-text">{message.content}</div> 
                     }
                 </div>

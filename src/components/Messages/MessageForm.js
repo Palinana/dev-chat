@@ -131,7 +131,7 @@ class MessageForm extends Component {
                 <form className="reply__form" onSubmit={this.handleSubmit}>
                     <label className="reply__label">
 
-                        <button className="reply__attach" onClick={this.openModal}>
+                        <button className="reply__attach" onClick={this.openModal} type="button">
                             <img alt="send-icon" className="reply__attach-image" src={require('../../Assets/Images/clip.svg')} />
                         </button>
                         <FileModal 
@@ -147,7 +147,7 @@ class MessageForm extends Component {
                             onChange={this.handleChange}
                         />
 
-                        <button className="reply__btn" disabled={loading}>
+                        <button className="reply__btn" disabled={loading} type="submit">
                             <img alt="send-icon" className="reply__btn--submit-image" src={require('../../Assets/Images/send.svg')} />
                         </button>
                     </label>

@@ -32,7 +32,7 @@
 }
   
 .message--other .message__details-text {
-    background: white;
+    background: #eee;
     color: black;
     border-radius: 0 14px 14px 14px;
 }
@@ -81,5 +81,14 @@
 }
 
 .message__details-image {
-    
+    display: flex;
+    flex-direction: row;
+}
+
+.image--self{
+    margin-left: auto;
+}
+
+.image--other{
+    margin-right: auto;
 }

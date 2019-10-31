@@ -3,7 +3,7 @@
 }
 
 .reply__form {
-    background-color: #FFFFFF;
+    background-color: #eee;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,23 +13,34 @@
     text-align: center;
 }
 
+.reply__form input {
+    background: white;
+}
+
+input:active,
+input:focus {
+    outline: none;
+}
+
 .reply__label {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 5.5rem;
-    background-color: white;
+    background-color: #eee;
     width: 100%;
 }
 
 .reply__attach {
     margin-right: 1rem;
-    border: none
+    border: none;
+    background: #eee;
 }
 
 .reply__btn {
     margin-left: 1rem;
-    border: none
+    border: none;
+    background: #eee;
 }
 
 .reply__btn--submit-image,
