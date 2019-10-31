@@ -3,14 +3,23 @@
 }
 
 .reply__form {
-    background-color: #FFFFFF;
+    background-color: #eee;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 3rem;
+    padding: 0 2rem;
     height: 100%;
     text-align: center;
+}
+
+.reply__form input {
+    background: white;
+}
+
+input:active,
+input:focus {
+    outline: none;
 }
 
 .reply__label {
@@ -18,20 +27,24 @@
     align-items: center;
     justify-content: center;
     height: 5.5rem;
-    background-color: white;
+    background-color: #eee;
     width: 100%;
 }
 
-.reply__input {
-
+.reply__attach {
+    margin-right: 1rem;
+    border: none;
+    background: #eee;
 }
 
 .reply__btn {
-    margin: 0 .5rem;
-    border: none
+    margin-left: 1rem;
+    border: none;
+    background: #eee;
 }
 
-.reply__btn--submit-image {
+.reply__btn--submit-image,
+.reply__attach-image {
     height: 2rem;
     width: 2rem;
 }
