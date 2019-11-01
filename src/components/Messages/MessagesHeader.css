@@ -1,0 +1,78 @@
+.messages__header {
+    background-color: #eee;
+    display: flex;
+    /* flex-direction: column; */
+    padding: 10px;
+}
+
+.messages__header-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+}
+
+.messages__header-info__stats {
+    display: flex;
+    flex-direction: row;
+}
+
+.messages__header-info__name{
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.messages__header-info__stats--users,
+.messages__header-info__stats--messages {
+    font-size: 1.3rem;
+    font-weight: 200;
+    color: #757373;
+}
+
+.messages__header-info__stats--messages::before {
+    content: "|";
+    margin-right: 1rem;
+}
+
+.messages__header-info__stats--messages {
+    margin-left: 1rem;
+}
+
+.messages__header__search {
+    flex: 0 0 30%;
+}
+
+.messages__header__search-form {
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0;
+    height: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.messages__header__search-form input {
+    background: white;
+}
+
+input:active,
+input:focus {
+    outline: none;
+}
+
+.messages__header__search--btn {
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 15px;
+    background: white;
+}
+
+.messages__header__search--image {
+    height: 2rem;
+    width: 2rem;
+    margin-left: .5rem;
+}

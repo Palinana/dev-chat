@@ -125,15 +125,16 @@ class MessageForm extends Component {
     }
 
     render() {
-        const { errors, message, loading, modal } = this.state;
+        const { errors, message, loading, modal, uploadState } = this.state;
         return (
             <div className="reply-container">
                 <form className="reply__form" onSubmit={this.handleSubmit}>
                     <label className="reply__label">
 
-                        <button className="reply__attach" onClick={this.openModal} type="button">
+                        <button className="reply__attach" onClick={this.openModal} type="button" disabled={uploadState === 'uploading'}>
                             <img alt="send-icon" className="reply__attach-image" src={require('../../Assets/Images/clip.svg')} />
                         </button>
+
                         <FileModal 
                             modal={modal}
                             closeModal={this.closeModal}
