@@ -7,8 +7,12 @@
 }
 
 .channels__title {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0;
     margin-right: auto;
+}
+
+.fa-exchange:before {
+    margin-right: 10px;
 }
 
 .channel {
