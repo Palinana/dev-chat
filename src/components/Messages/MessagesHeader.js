@@ -4,7 +4,7 @@ import './MessagesHeader.css';
 
 class MessagesHeader extends Component {
     render() {
-        const { channelName, numUniqueUsers, channelMessages, handleSearchChange } = this.props;
+        const { channelName, numUniqueUsers, channelMessages, handleSearchChange, searchLoading } = this.props;
         
         return (
             <div className="messages__header">
@@ -23,10 +23,17 @@ class MessagesHeader extends Component {
                             name="search"
                             placeholder="Search" 
                             onChange={handleSearchChange}
+                            loading={searchLoading}
                         />
-                        <button className="messages__header__search--btn" type="submit">
+                        { searchLoading ? 
+                            <div className="messages__header__search--loader">Loading...</div> :
+                            <button className="messages__header__search--btn" type="submit">
+                                <img alt="send-icon" className="messages__header__search--image" src={require('../../Assets/Images/search.svg')} />
+                            </button>
+                        }
+                        {/* <button className="messages__header__search--btn" type="submit">
                             <img alt="send-icon" className="messages__header__search--image" src={require('../../Assets/Images/search.svg')} />
-                        </button>
+                        </button> */}
                     </form>
                 </div>
             </div>

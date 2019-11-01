@@ -58,12 +58,13 @@ class Messages extends Component {
         const channelMessages = [...this.state.messages];
         const regex = new RegExp(this.state.searchTerm, 'gi'); //globally and case insensitive
         const searchResults = channelMessages.reduce((acc, message) => {
-            if(message.content && message.content.match(regex)) {
+            if(message.content && message.content.match(regex) || message.user.name.match(regex)) {
                 acc.push(message);
             }
             return acc;
         }, [])
         this.setState({ searchResults });
+        setTimeout(() => this.setState({ searchLoading: false }), 1000);
     }
 
     countUniqueUsers = messages => {
@@ -94,7 +95,8 @@ class Messages extends Component {
     displayTotalMessagesNum = messages => messages ? `${messages.length} messages` : ''
 
     render() {
-        const { messagesRef, messages, messagesLoading, channel, user, numUniqueUsers, searchTerm, searchResults } = this.state;
+        const { messagesRef, messages, messagesLoading, channel, user, numUniqueUsers, 
+            searchTerm, searchResults, searchLoading } = this.state;
         return (
             <div className="messages">
                 <MessagesHeader 
@@ -102,6 +104,7 @@ class Messages extends Component {
                     numUniqueUsers={numUniqueUsers}
                     channelMessages={this.displayTotalMessagesNum(messages)}
                     handleSearchChange={this.handleSearchChange}
+                    searchLoading={searchLoading}
                 />
                 <div className="messages-list">
                     { searchTerm ? 
