@@ -4,7 +4,7 @@ import './MessagesHeader.css';
 
 class MessagesHeader extends Component {
     render() {
-        const { channelName, numUniqueUsers, channelMessages } = this.props;
+        const { channelName, numUniqueUsers, channelMessages, handleSearchChange } = this.props;
         
         return (
             <div className="messages__header">
@@ -22,6 +22,7 @@ class MessagesHeader extends Component {
                             type="text" 
                             name="search"
                             placeholder="Search" 
+                            onChange={handleSearchChange}
                         />
                         <button className="messages__header__search--btn" type="submit">
                             <img alt="send-icon" className="messages__header__search--image" src={require('../../Assets/Images/search.svg')} />
