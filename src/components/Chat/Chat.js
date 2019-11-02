@@ -9,7 +9,7 @@ import Messages from '../Messages/Messages';
 
 import './Chat.css';
 
-const Chat = ({ currentUser, currentChannel }) => (
+const Chat = ({ currentUser, currentChannel, isPrivateChannel }) => (
     <div className="chat">
         <ColorPanel />
         <SidePanel currentUser={currentUser} key={currentUser && currentUser.id}/>
@@ -17,14 +17,17 @@ const Chat = ({ currentUser, currentChannel }) => (
             currentChannel={currentChannel} 
             currentUser={currentUser} key={currentUser && currentUser.id}
             key={currentChannel && currentChannel.id}
+            isPrivateChannel={isPrivateChannel}
         />
     </div>
 )
 
 const mapState = state => {
+    console.log(state)
     return {
         currentUser: state.user,
-        currentChannel: state.channels.currentChannel
+        currentChannel: state.channels.currentChannel,
+        isPrivateChannel: state.channels.isPrivateChannel
     }
 }
 

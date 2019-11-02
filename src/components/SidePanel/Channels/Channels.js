@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, Icon, Button } from 'semantic-ui-react';
-import firebase from '../../firebase';
+import firebase from '../../../firebase';
 
-import { setCurrentChannel } from '../../store';
+import { setCurrentChannel, setPrivateChannel } from '../../../store';
 
 import './Channels.css';
 
@@ -83,6 +83,7 @@ class Channels extends Component {
     changeChannel = channel => {
         this.setActiveChannel(channel)
         this.props.setCurrentChannel(channel);
+        this.props.setPrivateChannel(false);
     }
 
     setActiveChannel = channel => {
@@ -108,8 +109,7 @@ class Channels extends Component {
             <React.Fragment>
                 <div>
                     <div className="channels">
-                        <i className="fa fa-exchange" aria-hidden="true"></i>
-                        <span className="channels__title">CHANNELS ({channels.length})</span>
+                        <span className="channels__title"><i className="fa fa-exchange" aria-hidden="true"></i>CHANNELS ({channels.length})</span>
                         <i className="fa fa-plus" onClick={this.openModal}></i>
                     </div>
                     
@@ -177,7 +177,10 @@ const mapDispatch = dispatch => {
     return {
         setCurrentChannel(channel) {
             dispatch(setCurrentChannel(channel));
-        }
+        },
+        setCurrentChannel(state) {
+            dispatch(setCurrentChannel(state));
+        },
     }
 }
   

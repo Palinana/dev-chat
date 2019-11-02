@@ -10,12 +10,16 @@ import './Messages.css';
 
 class Messages extends Component {
     state = {
+        privateChannel: this.props.isPrivateChannel,
         messagesRef: firebase.database().ref('messages'),
         messages: [],
         messagesLoading: true,
         channel: this.props.currentChannel,
         user: this.props.currentUser,
-        numUniqueUsers: ''
+        numUniqueUsers: '',
+        searchTerm: '',
+        searchLoading: false,
+        searchResults: []
     }
 
     componentDidMount() {
@@ -42,6 +46,28 @@ class Messages extends Component {
         });
     }
 
+    handleSearchChange = event => {
+        this.setState({ 
+            searchTerm: event.target.value,
+            searchLoading: true 
+        }, () => this.handleSearchMessages());
+    }
+
+    // filters messages
+    handleSearchMessages = () => {
+        // coping messages
+        const channelMessages = [...this.state.messages];
+        const regex = new RegExp(this.state.searchTerm, 'gi'); //globally and case insensitive
+        const searchResults = channelMessages.reduce((acc, message) => {
+            if(message.content && message.content.match(regex) || message.user.name.match(regex)) {
+                acc.push(message);
+            }
+            return acc;
+        }, [])
+        this.setState({ searchResults });
+        setTimeout(() => this.setState({ searchLoading: false }), 1000);
+    }
+
     countUniqueUsers = messages => {
         const uniqueUsers = messages.reduce((acc, message) => {
             if(!acc.includes(message.user.name)) {
@@ -65,26 +91,36 @@ class Messages extends Component {
         ))
     )
 
-    displayChannelName = channel => channel ? `# ${channel.name}` : '';
+    displayChannelName = channel => {
+        return channel ? `${this.state.privateChannel ? '@' : '#'}${channel.name}` : '';
+    }
 
     displayTotalMessagesNum = messages => messages ? `${messages.length} messages` : ''
 
     render() {
-        const { messagesRef, messages, messagesLoading, channel, user, numUniqueUsers } = this.state;
+        const { messagesRef, messages, messagesLoading, channel, user, numUniqueUsers, 
+            searchTerm, searchResults, searchLoading, privateChannel } = this.state;
         return (
             <div className="messages">
                 <MessagesHeader 
                     channelName={this.displayChannelName(channel)}
                     numUniqueUsers={numUniqueUsers}
                     channelMessages={this.displayTotalMessagesNum(messages)}
+                    handleSearchChange={this.handleSearchChange}
+                    searchLoading={searchLoading}
+                    isPrivateChannel={privateChannel}
                 />
                 <div className="messages-list">
-                    {this.displayMessages(messages)}
+                    { searchTerm ? 
+                        this.displayMessages(searchResults) :
+                        this.displayMessages(messages)
+                    }
                 </div>
                 <MessageForm 
                     messagesRef={messagesRef} 
                     currentChannel={channel}
                     currentUser={user}
+                    isPrivateChannel={privateChannel}
                 />
             </div>
         )

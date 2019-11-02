@@ -4,12 +4,18 @@ import './MessagesHeader.css';
 
 class MessagesHeader extends Component {
     render() {
-        const { channelName, numUniqueUsers, channelMessages } = this.props;
+        const { channelName, numUniqueUsers, channelMessages, handleSearchChange, searchLoading, isPrivateChannel } = this.props;
         
         return (
             <div className="messages__header">
                 <div className="messages__header-info">
-                    <div className="messages__header-info__name">{channelName}</div>
+                    <div>
+                        <span className="messages__header-info__name">{channelName}
+                            {
+                                !isPrivateChannel && <i className="far fa-star" id="star" aria-hidden="true"></i>
+                            }
+                        </span>
+                    </div>
                     <div className="messages__header-info__stats">
                         <div className="messages__header-info__stats--users">{numUniqueUsers}</div>
                         <div className="messages__header-info__stats--messages">{channelMessages}</div>
@@ -22,10 +28,15 @@ class MessagesHeader extends Component {
                             type="text" 
                             name="search"
                             placeholder="Search" 
+                            onChange={handleSearchChange}
+                            loading={searchLoading}
                         />
-                        <button className="messages__header__search--btn" type="submit">
-                            <img alt="send-icon" className="messages__header__search--image" src={require('../../Assets/Images/search.svg')} />
-                        </button>
+                        { searchLoading ? 
+                            <div className="messages__header__search--loader">Loading...</div> :
+                            <button className="messages__header__search--btn" type="submit">
+                                <img alt="send-icon" className="messages__header__search--image" src={require('../../Assets/Images/search.svg')} />
+                            </button>
+                        }
                     </form>
                 </div>
             </div>

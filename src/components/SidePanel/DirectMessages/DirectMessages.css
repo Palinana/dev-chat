@@ -1,0 +1,34 @@
+.direct-messages {
+
+}
+
+.direct-messages__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3rem;
+}
+
+.direct-messages__header--title {
+    padding: 1.5rem 0;
+    margin-right: auto;
+}
+
+.fa-envelope:before {
+    margin-right: 10px;
+}
+
+.direct-messages__username {
+    list-style: none;
+    padding: .5rem 3rem;
+    display: flex;
+}
+
+.username {
+    margin-right: auto;
+}
+
+.fas {
+    color: #0ff9e5;
+}
