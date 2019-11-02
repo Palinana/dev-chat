@@ -10,6 +10,7 @@ import './Messages.css';
 
 class Messages extends Component {
     state = {
+        privateChannel: this.props.isPrivateChannel,
         messagesRef: firebase.database().ref('messages'),
         messages: [],
         messagesLoading: true,
@@ -90,13 +91,15 @@ class Messages extends Component {
         ))
     )
 
-    displayChannelName = channel => channel ? `# ${channel.name}` : '';
+    displayChannelName = channel => {
+        return channel ? `${this.state.privateChannel ? '@' : '#'}${channel.name}` : '';
+    }
 
     displayTotalMessagesNum = messages => messages ? `${messages.length} messages` : ''
 
     render() {
         const { messagesRef, messages, messagesLoading, channel, user, numUniqueUsers, 
-            searchTerm, searchResults, searchLoading } = this.state;
+            searchTerm, searchResults, searchLoading, privateChannel } = this.state;
         return (
             <div className="messages">
                 <MessagesHeader 
@@ -105,6 +108,7 @@ class Messages extends Component {
                     channelMessages={this.displayTotalMessagesNum(messages)}
                     handleSearchChange={this.handleSearchChange}
                     searchLoading={searchLoading}
+                    isPrivateChannel={privateChannel}
                 />
                 <div className="messages-list">
                     { searchTerm ? 
@@ -116,6 +120,7 @@ class Messages extends Component {
                     messagesRef={messagesRef} 
                     currentChannel={channel}
                     currentUser={user}
+                    isPrivateChannel={privateChannel}
                 />
             </div>
         )

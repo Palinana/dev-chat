@@ -18,3 +18,17 @@
 .fa-envelope:before {
     margin-right: 10px;
 }
+
+.direct-messages__username {
+    list-style: none;
+    padding: .5rem 3rem;
+    display: flex;
+}
+
+.username {
+    margin-right: auto;
+}
+
+.fas {
+    color: #0ff9e5;
+}

@@ -99,8 +99,9 @@ input:focus {
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
-  }
-  .messages__header__search--loader:before {
+}
+
+.messages__header__search--loader:before {
     width: 50%;
     height: 50%;
     background: #c3c3c3;
@@ -109,8 +110,9 @@ input:focus {
     top: 0;
     left: 0;
     content: '';
-  }
-  .messages__header__search--loader:after {
+}
+
+.messages__header__search--loader:after {
     background: white;
     width: 75%;
     height: 75%;
@@ -122,8 +124,9 @@ input:focus {
     left: 0;
     bottom: 0;
     right: 0;
-  }
-  @-webkit-keyframes load3 {
+}
+
+@-webkit-keyframes load3 {
     0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
@@ -132,7 +135,8 @@ input:focus {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
-  }
+}
+
   @keyframes load3 {
     0% {
       -webkit-transform: rotate(0deg);
@@ -142,4 +146,9 @@ input:focus {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
-  }
+}
+
+#star {
+    margin-left: 5px;
+    font-size: 14px;
+}
