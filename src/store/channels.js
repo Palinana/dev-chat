@@ -22,7 +22,7 @@ export const setCurrentChannel = channel => async dispatch => {
 
 export const setPrivateChannel = channel => async dispatch => {
     try {
-        dispatch(settingChannel(channel))
+        dispatch(settingPrivateChannel(channel))
     } catch (err) {
         console.error(err)
     }
@@ -44,7 +44,7 @@ export default function(state = initialChannelState, action){
                 ...state,
                 currentChannel: action.channel
             };
-        case SET_CURRENT_CHANNEL:
+        case SET_PRIVATE_CHANNEL:
             return {
                 ...state,
                 isPrivateChannel: action.isPrivate
