@@ -104,7 +104,7 @@ class Channels extends Component {
     isFormValid = ({ channelName, channelDetails }) => channelName && channelDetails;
 
     render() {
-        const { channels, modal } = this.state;
+        const { channels, modal, activeChannel } = this.state;
         return (
             <React.Fragment>
                 <div>
@@ -118,9 +118,8 @@ class Channels extends Component {
                             channels.length && channels.map((channel, ind) => {
                                 return (
                                     <li 
-                                        // className="channel__name"
                                         className={
-                                            channel.id === this.state.activeChannel 
+                                            channel.id === activeChannel 
                                             ? "channel--active channel__name"
                                             : "channel__name"
                                         }
@@ -178,8 +177,8 @@ const mapDispatch = dispatch => {
         setCurrentChannel(channel) {
             dispatch(setCurrentChannel(channel));
         },
-        setCurrentChannel(state) {
-            dispatch(setCurrentChannel(state));
+        setPrivateChannel(state) {
+            dispatch(setPrivateChannel(state));
         },
     }
 }

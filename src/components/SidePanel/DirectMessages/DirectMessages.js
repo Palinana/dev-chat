@@ -10,6 +10,7 @@ import './DirectMessages.css';
 
 class DirectMessages extends Component {
     state = {
+        activeChannel: '',
         user: this.props.currentUser,
         users: [],
         usersRef: firebase.database().ref('users'),
@@ -80,6 +81,7 @@ class DirectMessages extends Component {
         };
         this.props.setCurrentChannel(channelData);
         this.props.setPrivateChannel(true);
+        this.setActiveChannel(user.uid);
     }
 
     getChannelId = userId => {
@@ -90,8 +92,12 @@ class DirectMessages extends Component {
             `${currentUserId}/${userId}`;
     }
 
+    setActiveChannel = userId => {
+        this.setState({ activeChannel: userId });
+    }
+
     render() {
-        const { users } = this.state;
+        const { users, activeChannel } = this.state;
 
         return (
             <div className="direct-messages">
@@ -103,7 +109,12 @@ class DirectMessages extends Component {
                     {
                         users.length && users.map((user, ind) => {
                             return (
-                                <li className="direct-messages__username"
+                                <li 
+                                    className={
+                                        user.uid === activeChannel 
+                                        ? "direct-messages--active direct-messages__username"
+                                        : "direct-messages__username"
+                                    }
                                     key={ind}
                                     onClick={() => this.changeChannel(user)}
                                 >

@@ -22,7 +22,8 @@
 }
 
 .messages__header-info__stats--users,
-.messages__header-info__stats--messages {
+.messages__header-info__stats--messages,
+.messages__header-info__stats--messages-private {
     font-size: 1.3rem;
     font-weight: 200;
     color: #757373;
