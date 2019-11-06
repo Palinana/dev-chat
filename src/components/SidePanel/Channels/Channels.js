@@ -60,7 +60,7 @@ class Channels extends Component {
         const newChannel = {
             id: key,
             name: channelName,
-            ditails: channelDetails,
+            details: channelDetails,
             createdBy: {
                 name: user.displayName,
                 avatar: user.photoURL

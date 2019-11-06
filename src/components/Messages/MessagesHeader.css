@@ -153,3 +153,7 @@ input:focus {
     margin-left: 5px;
     font-size: 14px;
 }
+
+.star-filled {
+    color: #f1d02a;
+}

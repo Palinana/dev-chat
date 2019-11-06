@@ -23,7 +23,6 @@ const Chat = ({ currentUser, currentChannel, isPrivateChannel }) => (
 )
 
 const mapState = state => {
-    console.log(state)
     return {
         currentUser: state.user,
         currentChannel: state.channels.currentChannel,
