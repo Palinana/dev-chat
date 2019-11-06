@@ -4,7 +4,8 @@ import './MessagesHeader.css';
 
 class MessagesHeader extends Component {
     render() {
-        const { channelName, numUniqueUsers, channelMessages, handleSearchChange, searchLoading, isPrivateChannel } = this.props;
+        const { channelName, numUniqueUsers, channelMessages, handleSearchChange, 
+            searchLoading, isPrivateChannel, handleStar, isChannelStarred } = this.props;
         
         return (
             <div className="messages__header">
@@ -12,7 +13,14 @@ class MessagesHeader extends Component {
                     <div>
                         <span className="messages__header-info__name">{channelName}
                             {
-                                !isPrivateChannel && <i className="far fa-star" id="star" aria-hidden="true"></i>
+                                !isPrivateChannel && (
+                                    <i 
+                                    className={isChannelStarred ? "fas fa-star star-filled" : "far fa-star "} 
+                                    id="star" 
+                                    aria-hidden="true"
+                                    onClick={handleStar}
+                                    ></i>
+                                )
                             }
                         </span>
                     </div>
