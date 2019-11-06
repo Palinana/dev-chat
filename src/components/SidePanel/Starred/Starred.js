@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, Icon, Button } from 'semantic-ui-react';
+import firebase from '../../../firebase';
 
 import { setCurrentChannel, setPrivateChannel } from '../../../store';
 
@@ -8,8 +9,42 @@ import './Starred.css';
 
 class Starred extends Component {
     state = {
+        user: this.props.currentUser,
+        usersRef: firebase.database().ref('users'),
         activeChannel: '',
         starredChannels: []
+    }
+
+    componentDidMount() {
+        const { user } = this.state;
+
+        if(user) {
+            this.addListeners(user.uid);
+        } 
+    }
+
+    addListeners = userId => {
+        this.state.usersRef
+            .child(userId)
+            .child('starred')
+            .on('child_added', snap => {
+                const starredChannel = {id: snap.key, ...snap.val()};
+                this.setState({
+                    starredChannels: [...this.state.starredChannels, starredChannel]
+                });
+            });
+        
+        this.state.usersRef
+            .child(userId)
+            .child('starred')
+            .on('child_removed', snap => {
+                const channelToRemove = {id: snap.key, ...snap.val()};
+                const filteredChannels = this.state.starredChannels.filter(channel => {
+                    return channel.id !== channelToRemove.id; 
+                });
+
+                this.setState({ starredChannels: filteredChannels });
+            });
     }
 
     setActiveChannel = channel => {
@@ -23,7 +58,7 @@ class Starred extends Component {
     }
 
     render() {
-        const { starredChannels } = this.state;
+        const { starredChannels, activeChannel } = this.state;
 
         return (
             <div>
@@ -36,11 +71,11 @@ class Starred extends Component {
                         starredChannels.length && starredChannels.map((channel, ind) => {
                             return (
                                 <li 
-                                    // className={
-                                    //     channel.id === activeChannel 
-                                    //     ? "starred-channel--active starred-channel"
-                                    //     : "starred-channel"
-                                    // }
+                                    className={
+                                        channel.id === activeChannel 
+                                        ? "starred-channel--active starred-channel"
+                                        : "starred-channel"
+                                    }
                                     key={ind}
                                     onClick={() => this.changeChannel(channel)}
                                 >

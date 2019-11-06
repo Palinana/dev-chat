@@ -12,10 +12,13 @@ class Channels extends Component {
         user: this.props.currentUser,
         activeChannel: '',
         channels: [],
+        channel: null,
         channelName: '',
         channelDetails: '',
         modal: false,
         channelsRef: firebase.database().ref('channels'),
+        messagessRef: firebase.database().ref('messages'),
+        notifications: [],
         firstLoad: true
     }
 
@@ -32,7 +35,43 @@ class Channels extends Component {
         this.state.channelsRef.on('child_added', snap => {
             loadedChannels.push(snap.val());
             this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
+            this.addNotificationListener(snap.key);
         });
+    }
+
+    //listening for new messages added to any channels
+    addNotificationListener = channelId => {
+        this.state.messagessRef.child(channelId).on('value', snap => {
+            if(this.state.channel) {
+                this.handleNotifications(channelId, this.state.channel.id, this.state.notifications, snap);
+            }
+        });
+    }
+
+    handleNotifications  = (channelId, currentChannelId, notifications, snap) => {
+        let lastTotal = 0;
+
+        let index = notifications.findIndex(notification => notification.id === channelId);
+        if(index !== -1) {
+            if(channelId !== currentChannelId) {
+                lastTotal = notifications[index].total;
+
+                if(snap.numChildren() - lastTotal > 0) {
+                    notifications[index].count = snap.numChildren() - lastTotal;
+                }
+            }
+            notifications[index].lastKnownTotal = snap.numChildren();
+        }
+        else {
+            notifications.push({
+                id: channelId,
+                total: snap.numChildren(),
+                lastKnownTotal: snap.numChildren(),
+                count: 0
+            });
+        }
+
+        this.setState({ notifications });
     }
 
     setFirstChannel = () => {
@@ -41,6 +80,7 @@ class Channels extends Component {
         if(this.state.firstLoad && this.state.channels.length > 0) {
             this.props.setCurrentChannel(firstChannel);
             this.setActiveChannel(firstChannel);
+            this.setState({ channel: firstChannel });
         }
         this.setState({ firstLoad: false });
     }
@@ -81,9 +121,34 @@ class Channels extends Component {
     }
 
     changeChannel = channel => {
-        this.setActiveChannel(channel)
+        this.setActiveChannel(channel);
+        this.clearNotifications();
         this.props.setCurrentChannel(channel);
         this.props.setPrivateChannel(false);
+        this.setState({ channel });
+    }
+
+    clearNotifications = () => {
+        let index = this.state.notifications.findIndex(notification => notification.id === this.state.channel.id);
+
+        if(index !== -1) {
+            let updatedNotifications = [...this.state.notifications];
+            updatedNotifications[index].total = this.state.notifications[index].lastKnownTotal;
+            updatedNotifications[index].count = 0;
+            this.setState({ notifications: updatedNotifications });
+        }
+    }
+
+    getNotificationsCount = channel => {
+        let count = 0;
+
+        this.state.notifications.forEach(notification => {
+            if(notification.id === channel.id) {
+                count = notification.count;
+            }
+        });
+
+        if(count > 0) return count;
     }
 
     setActiveChannel = channel => {
@@ -126,7 +191,12 @@ class Channels extends Component {
                                         key={ind}
                                         onClick={() => this.changeChannel(channel)}
                                     >
-                                    # {channel.name}
+                                    <span className="channel__name-name"># {channel.name}</span>
+                                    {this.getNotificationsCount(channel) && (
+                                        <div className="channel__name-notification">
+                                            <span>{this.getNotificationsCount(channel)}</span>
+                                        </div>
+                                    )}
                                     </li>
                                 )
                             })
