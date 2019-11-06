@@ -15,7 +15,7 @@ class SidePanel extends Component {
             <div className="side-panel">
                 <UserPanel currentUser={currentUser}/>
                 <Channels currentUser={currentUser}/>
-                <Starred />
+                <Starred currentUser={currentUser} />
                 <DirectMessages currentUser={currentUser}/>
             </div>
         )
