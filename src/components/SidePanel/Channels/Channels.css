@@ -21,6 +21,7 @@
 }
 
 .channel__name{
+    display: flex;
     list-style: none;
     opacity: 0.7;
     padding: .5rem 3rem;
@@ -33,4 +34,15 @@
 .channel--active {
     background: rgba(251, 251, 251, 0.2);
     opacity: 1;
+}
+
+.channel__name-name {
+    margin-right: auto;
+}
+
+.channel__name-notification {
+    display: inline-block;
+    padding: 0 1rem;
+    background: #f94040;
+    border-radius: 1rem;
 }
