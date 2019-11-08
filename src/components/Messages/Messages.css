@@ -12,3 +12,13 @@
     margin: 10px;
     overflow-y: scroll;
 }
+
+.messages__typing {
+    display: flex;
+    align-items: center;
+}
+
+.messages__typing-dots{
+    font-style: italic;
+    margin-right: 3px;
+}
