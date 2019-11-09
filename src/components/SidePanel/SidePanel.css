@@ -2,10 +2,6 @@
     flex: 0 0 20%;
     display: flex;
     flex-direction: column;
-
-	/* background: #ECF0EF;
-	color: #101010;
-	 */
     background: #36AF8C;
 	background: -webkit-linear-gradient(to bottom, #36AF8C, #38A2A9);
 	background: linear-gradient(to bottom, #36AF8C, #38A2A9);
@@ -13,4 +9,32 @@
 	background-size: cover;
 	background-position: 0 0;
 	color: #FFFFFF;
+}
+
+/* Modal */
+.side-panel--modal {
+	flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    background: #36AF8C;
+	background: -webkit-linear-gradient(to bottom, #36AF8C, #38A2A9);
+	background: linear-gradient(to bottom, #36AF8C, #38A2A9);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+
+	z-index: 100;
+}
+
+@media only screen and (max-width: 990px) {
+	.side-panel {
+		display: none;
+	}
+}
+
+@media (min-width: 990px) and (max-width: 1250px) {
+	.side-panel {
+		flex: 0 0 25%;
+	}
 }

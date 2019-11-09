@@ -157,3 +157,22 @@ input:focus {
 .star-filled {
     color: #f1d02a;
 }
+
+/* Menu */
+.messages__header-menu {
+    display: block;
+    margin-right: 2.5rem;
+    font-size: 3rem;
+}
+
+.messages__header-menu--hidden {
+    display: none;
+}
+
+@media only screen and (max-width: 990px) {
+	.messages__header-menu--hidden {
+        display: block;
+        margin-right: 2.5rem;
+        font-size: 3rem;
+	}
+}

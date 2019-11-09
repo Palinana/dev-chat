@@ -206,7 +206,11 @@ class Messages extends Component {
 
     render() {
         const { messagesRef, messages, messagesLoading, channel, user, numUniqueUsers, 
-            searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, typingUsers } = this.state;
+            searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, 
+            typingUsers } = this.state;
+        
+        const { handleMenu, menuActive } = this.props;
+
         return (
             <div className="messages">
                 <MessagesHeader 
@@ -218,6 +222,8 @@ class Messages extends Component {
                     isPrivateChannel={privateChannel}
                     handleStar={this.handleStar}
                     isChannelStarred={isChannelStarred}
+                    handleMenu={handleMenu}
+                    menuActive={menuActive}
                 />
                 <div className="messages-list">
                     { searchTerm ? 
