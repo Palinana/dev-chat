@@ -10,14 +10,13 @@ import './Channels.css';
 class Channels extends Component {
     state = {
         user: this.props.currentUser,
-        activeChannel: '',
         channels: [],
         channel: null,
         channelName: '',
         channelDetails: '',
         modal: false,
         channelsRef: firebase.database().ref('channels'),
-        messagessRef: firebase.database().ref('messages'),
+        messagesRef: firebase.database().ref('messages'),
         typingRef: firebase.database().ref('typing'),
         notifications: [],
         firstLoad: true
@@ -42,7 +41,7 @@ class Channels extends Component {
 
     //listening for new messages added to any channels
     addNotificationListener = channelId => {
-        this.state.messagessRef.child(channelId).on('value', snap => {
+        this.state.messagesRef.child(channelId).on('value', snap => {
             if(this.state.channel) {
                 this.handleNotifications(channelId, this.state.channel.id, this.state.notifications, snap);
             }
@@ -80,7 +79,8 @@ class Channels extends Component {
 
         if(this.state.firstLoad && this.state.channels.length > 0) {
             this.props.setCurrentChannel(firstChannel);
-            this.setActiveChannel(firstChannel);
+            this.props.setActiveChannel(firstChannel.id);
+
             this.setState({ channel: firstChannel });
         }
         this.setState({ firstLoad: false });
@@ -88,6 +88,9 @@ class Channels extends Component {
 
     removeListners = () => {
         this.state.channelsRef.off();
+        this.state.channels.forEach(channel => {
+            this.state.messagesRef.child(channel.id).off()
+        })
     }
 
     openModal = () => this.setState({ modal: true });
@@ -122,7 +125,7 @@ class Channels extends Component {
     }
 
     changeChannel = channel => {
-        this.setActiveChannel(channel);
+        this.props.setActiveChannel(channel.id);
         this.state.typingRef
             .child(this.state.channel.id)
             .child(this.state.user.uid)
@@ -156,10 +159,6 @@ class Channels extends Component {
         if(count > 0) return count;
     }
 
-    setActiveChannel = channel => {
-        this.setState({ activeChannel: channel.id });
-    }
-
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -174,7 +173,9 @@ class Channels extends Component {
     isFormValid = ({ channelName, channelDetails }) => channelName && channelDetails;
 
     render() {
-        const { channels, modal, activeChannel } = this.state;
+        const { channels, modal } = this.state;
+        const {  activeChannel } = this.props;
+
         return (
             <React.Fragment>
                 <div>
