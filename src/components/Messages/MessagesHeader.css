@@ -1,8 +1,7 @@
 .messages__header {
     background-color: #eee;
     display: flex;
-    /* flex-direction: column; */
-    padding: 10px;
+    padding: 10px 2.5rem;
 }
 
 .messages__header-info {

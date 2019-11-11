@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import uuidv4 from 'uuid/v4';
+
+import { Picker, emojiIndex } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
+
 import firebase from '../../firebase';
 import FileModal from './FileModal';
 
@@ -17,7 +21,8 @@ class MessageForm extends Component {
         uploadTask: null,
         storageRef: firebase.storage().ref(),
         percentUploaded: 0,
-        typingRef: firebase.database().ref('typing')
+        typingRef: firebase.database().ref('typing'),
+        emojiPicker: false
     }
 
     openModal = () => this.setState({ modal: true });
@@ -43,6 +48,34 @@ class MessageForm extends Component {
               .child(user.uid)
               .remove();
         }
+    };
+
+    handleTogglePicker = () => {
+        this.setState({ emojiPicker: !this.state.emojiPicker });
+    };
+
+    handleAddEmoji = emoji => {
+        // console.log('this.messageInputRef ', this.messageInputRef)
+        const oldMessage = this.state.message;
+        const newMessage = this.colonToUnicode(` ${oldMessage} ${emoji.colons}`);
+        this.setState({ message: newMessage, emojiPicker: false });
+        setTimeout(() => this.messageInputRef.focus(), 0);
+    };
+
+    // converts emoji value to unicode(using emojiIndex)
+    colonToUnicode = message => {
+        return message.replace(/:[A-Za-z0-9_+-]+:/g, x => {
+          x = x.replace(/:/g, "");
+          let emoji = emojiIndex.emojis[x];
+          if (typeof emoji !== "undefined") {
+            let unicode = emoji.native;
+            if (typeof unicode !== "undefined") {
+              return unicode;
+            }
+          }
+          x = ":" + x + ":";
+          return x;
+        });
     };
 
     handleSubmit = event => {
@@ -157,34 +190,51 @@ class MessageForm extends Component {
     }
 
     render() {
-        const { errors, message, loading, modal, uploadState } = this.state;
+        const { errors, message, loading, modal, uploadState, emojiPicker } = this.state;
         return (
             <div className="reply-container">
                 <form className="reply__form" onSubmit={this.handleSubmit}>
-                    <label className="reply__label">
+                
 
-                        <button className="reply__attach" onClick={this.openModal} type="button" disabled={uploadState === 'uploading'}>
-                            <img alt="send-icon" className="reply__attach-image" src={require('../../Assets/Images/clip.svg')} />
-                        </button>
-
-                        <FileModal 
-                            modal={modal}
-                            closeModal={this.closeModal}
-                            uploadFile={this.uploadFile}
-                        />
-                        <input 
-                            type="text" 
-                            name="message"
-                            placeholder="Write your message" 
-                            value={message}
-                            onChange={this.handleChange}
-                            onKeyDown={this.handleKeyDown}
-                        />
-
-                        <button className="reply__btn" disabled={loading} type="submit">
-                            <img alt="send-icon" className="reply__btn--submit-image" src={require('../../Assets/Images/send.svg')} />
-                        </button>
-                    </label>
+                        
+                        <div className="reply__form-container">
+                            <button className="reply__attach" onClick={this.openModal} type="button" disabled={uploadState === 'uploading'}>
+                                <img alt="send-icon" className="reply__attach-image" src={require('../../Assets/Images/clip.svg')} />
+                            </button>
+                            <label className="reply__label">
+                                <FileModal 
+                                    modal={modal}
+                                    closeModal={this.closeModal}
+                                    uploadFile={this.uploadFile}
+                                />
+                                {emojiPicker && (
+                                    <Picker
+                                        set="apple"
+                                        className="emojipicker"
+                                        onSelect={this.handleAddEmoji}
+                                        title="Pick your emoji"
+                                        emoji="point_up"
+                                    />
+                                )}
+                                <input 
+                                    type="text" 
+                                    name="message"
+                                    placeholder="Write your message" 
+                                    value={message}
+                                    onChange={this.handleChange}
+                                    onKeyDown={this.handleKeyDown}
+                                    ref={node => (this.messageInputRef = node)}
+                                />
+                            </label>
+                            <button 
+                                className="emoji__btn" 
+                                disabled={loading} 
+                                type="button"
+                                onClick={this.handleTogglePicker}
+                            >
+                                <img alt="send-icon" className="emoji__btn--submit-image" src={require('../../Assets/Images/smile.svg')} />
+                            </button>
+                        </div>
                 </form>
             </div>
         )
