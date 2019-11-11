@@ -10,7 +10,8 @@
 .messages-list {
     flex: 1 0 0%;
     margin: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding: 1em;
 }
 
 .messages__typing {

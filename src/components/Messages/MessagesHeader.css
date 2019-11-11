@@ -1,8 +1,7 @@
 .messages__header {
     background-color: #eee;
     display: flex;
-    /* flex-direction: column; */
-    padding: 10px;
+    padding: 10px 2.5rem;
 }
 
 .messages__header-info {
@@ -23,6 +22,8 @@
 
 .messages__header-info__stats--users,
 .messages__header-info__stats--messages,
+.messages__header-info__stats--messages-dash,
+.messages__header-info__stats--empty,
 .messages__header-info__stats--messages-private {
     font-size: 1.3rem;
     font-weight: 200;
@@ -156,4 +157,23 @@ input:focus {
 
 .star-filled {
     color: #f1d02a;
+}
+
+/* Menu */
+.messages__header-menu {
+    display: block;
+    margin-right: 2.5rem;
+    font-size: 3rem;
+}
+
+.messages__header-menu--hidden {
+    display: none;
+}
+
+@media only screen and (max-width: 990px) {
+	.messages__header-menu--hidden {
+        display: block;
+        margin-right: 2.5rem;
+        font-size: 3rem;
+	}
 }

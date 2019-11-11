@@ -26,8 +26,7 @@ class UserPanel extends Component {
     dropdownOprions = () => [
         {
             key: 'user',
-            text: <span>Sign in as <strong>{this.state.user.displayName}</strong></span>,
-            disable: true
+            text: <span disabled="disabled">Sign in as <strong>{this.state.user.displayName}</strong></span>,
         },
         {
             key: 'avatar',

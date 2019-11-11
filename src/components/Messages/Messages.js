@@ -36,7 +36,24 @@ class Messages extends Component {
             this.addListeners(channel.id);
             this.addUserStarsListener(channel.id, user.uid);
         } 
+        
+        if(this.messagesEnd) {
+            this.scrollToBottom();
+        }
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(this.messagesEnd) {
+            this.scrollToBottom();
+        }
+    }
+
+    scrollToBottom = () => {
+        const scrollHeight = this.messagesEnd.scrollHeight;
+        const height = this.messagesEnd.clientHeight;
+        const maxScrollTop = scrollHeight - height;
+        this.messagesEnd.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    };
 
     addListeners = channelId => {
         this.addMessageListener(channelId);
@@ -206,7 +223,11 @@ class Messages extends Component {
 
     render() {
         const { messagesRef, messages, messagesLoading, channel, user, numUniqueUsers, 
-            searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, typingUsers } = this.state;
+            searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, 
+            typingUsers } = this.state;
+        
+        const { handleMenu, menuActive } = this.props;
+
         return (
             <div className="messages">
                 <MessagesHeader 
@@ -218,8 +239,10 @@ class Messages extends Component {
                     isPrivateChannel={privateChannel}
                     handleStar={this.handleStar}
                     isChannelStarred={isChannelStarred}
+                    handleMenu={handleMenu}
+                    menuActive={menuActive}
                 />
-                <div className="messages-list">
+                <div className="messages-list" ref={node => {this.messagesEnd = node}}>
                     { searchTerm ? 
                         this.displayMessages(searchResults) :
                         this.displayMessages(messages)

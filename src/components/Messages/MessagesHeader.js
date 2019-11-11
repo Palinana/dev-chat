@@ -5,10 +5,13 @@ import './MessagesHeader.css';
 class MessagesHeader extends Component {
     render() {
         const { channelName, numUniqueUsers, channelMessages, handleSearchChange, 
-            searchLoading, isPrivateChannel, handleStar, isChannelStarred } = this.props;
+            searchLoading, isPrivateChannel, handleStar, isChannelStarred, menuActive, handleMenu } = this.props;
         
         return (
             <div className="messages__header">
+                <div className={menuActive ? "messages__header-menu" : "messages__header-menu--hidden"}>
+                    <i class="fa fa-bars" onClick={handleMenu}></i>
+                </div>
                 <div className="messages__header-info">
                     <div>
                         <span className="messages__header-info__name">{channelName}
@@ -26,7 +29,7 @@ class MessagesHeader extends Component {
                     </div>
                     <div className="messages__header-info__stats">
                         { !isPrivateChannel && <div className="messages__header-info__stats--users">{numUniqueUsers}</div>}
-                        <div className={isPrivateChannel ? "messages__header-info__stats--messages-private":"messages__header-info__stats--messages"}>{channelMessages}</div>
+                        <div className={isPrivateChannel ? "messages__header-info__stats--messages-private": numUniqueUsers ? "messages__header-info__stats--messages" : "messages__header-info__stats--empty"}>{channelMessages}</div>
                     </div>
                 </div>
 

@@ -1,6 +1,7 @@
 .user-panel {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .user-panel__title {

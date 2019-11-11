@@ -68,7 +68,7 @@ class Starred extends Component {
                 
                 <ul className="starred-channels">
                     {
-                        starredChannels.length && starredChannels.map((channel, ind) => {
+                        starredChannels.length > 0 && starredChannels.map((channel, ind) => {
                             return (
                                 <li 
                                     className={
