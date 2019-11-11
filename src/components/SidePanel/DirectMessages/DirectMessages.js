@@ -103,7 +103,7 @@ class DirectMessages extends Component {
 
                 <ul className="direct-message">
                     {
-                        users.length && users.map((user, ind) => {
+                        users.length > 0 && users.map((user, ind) => {
                             return (
                                 <li 
                                     className={

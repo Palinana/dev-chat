@@ -23,6 +23,7 @@
   
 .message--self{
     justify-content: flex-end;
+    margin-right: 1rem;
 }
   
 .message--self .message__details-text {
@@ -83,6 +84,11 @@
 .message__details-image {
     display: flex;
     flex-direction: row;
+}
+
+.message__details-image img{
+    width: 100%;
+    max-width: 400px;
 }
 
 .image--self{

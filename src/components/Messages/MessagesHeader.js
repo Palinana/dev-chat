@@ -29,7 +29,7 @@ class MessagesHeader extends Component {
                     </div>
                     <div className="messages__header-info__stats">
                         { !isPrivateChannel && <div className="messages__header-info__stats--users">{numUniqueUsers}</div>}
-                        <div className={isPrivateChannel ? "messages__header-info__stats--messages-private":"messages__header-info__stats--messages"}>{channelMessages}</div>
+                        <div className={isPrivateChannel ? "messages__header-info__stats--messages-private": numUniqueUsers ? "messages__header-info__stats--messages" : "messages__header-info__stats--empty"}>{channelMessages}</div>
                     </div>
                 </div>
 

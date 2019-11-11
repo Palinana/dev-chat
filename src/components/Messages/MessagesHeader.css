@@ -22,6 +22,8 @@
 
 .messages__header-info__stats--users,
 .messages__header-info__stats--messages,
+.messages__header-info__stats--messages-dash,
+.messages__header-info__stats--empty,
 .messages__header-info__stats--messages-private {
     font-size: 1.3rem;
     font-weight: 200;

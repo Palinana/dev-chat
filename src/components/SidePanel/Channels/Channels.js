@@ -186,7 +186,7 @@ class Channels extends Component {
                     
                     <ul className="channel">
                         {
-                            channels.length && channels.map((channel, ind) => {
+                            channels.length > 0 && channels.map((channel, ind) => {
                                 return (
                                     <li 
                                         className={
