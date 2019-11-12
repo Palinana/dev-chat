@@ -4,6 +4,7 @@ import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm';
 import Message from './Message';
 import Typing from '../UI/Typing';
+import Skeleton  from "../UI/Skeleton";
 
 import firebase from '../../firebase';
 
@@ -27,6 +28,7 @@ class Messages extends Component {
         typingRef: firebase.database().ref("typing"),
         typingUsers: [],
         connectedRef: firebase.database().ref(".info/connected"),
+        initialCreation: true
     }
 
     componentDidMount() {
@@ -107,6 +109,10 @@ class Messages extends Component {
                 messagesLoading: false
             });
             this.countUniqueUsers(loadedMessages);
+        });
+
+        this.setState({
+            messagesLoading: false
         });
     }
 
@@ -208,6 +214,15 @@ class Messages extends Component {
         ))
     )
 
+    displayMessagesLoading = mesagesLoading =>
+        mesagesLoading ? ( 
+            <React.Fragment>
+                {[...Array(10)].map((_, i) => (
+                    <Skeleton key={i} />
+                ))}
+            </React.Fragment>
+        ) : null;
+
     displayChannelName = channel => {
         return channel ? `${this.state.privateChannel ? '@' : '#'}${channel.name}` : '';
     }
@@ -243,6 +258,7 @@ class Messages extends Component {
                     menuActive={menuActive}
                 />
                 <div className="messages-list" ref={node => {this.messagesEnd = node}}>
+                    {this.displayMessagesLoading(messagesLoading)}
                     { searchTerm ? 
                         this.displayMessages(searchResults) :
                         this.displayMessages(messages)
