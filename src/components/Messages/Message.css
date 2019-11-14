@@ -1,5 +1,6 @@
 .message__row {
     display: flex;
+    flex-direction: column;
     flex: 0 0 auto;
     margin-bottom: 20px;
 }
@@ -97,4 +98,21 @@
 
 .image--other{
     margin-right: auto;
+}
+
+.day {
+    display: flex;
+    align-items: center;
+}
+  
+.day__line {
+    flex: 1;
+    height: 1px;
+    background: #ccc;
+}
+  
+.day__text {
+    font-weight: bold;
+    padding: 10px;
+    font-size: 80%;
 }
