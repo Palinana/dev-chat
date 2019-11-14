@@ -4,6 +4,8 @@ import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm';
 import Message from './Message';
 import Typing from '../UI/Typing';
+import Skeleton  from "../UI/Skeleton";
+import isSameDay from 'date-fns/isSameDay'
 
 import firebase from '../../firebase';
 
@@ -27,12 +29,14 @@ class Messages extends Component {
         typingRef: firebase.database().ref("typing"),
         typingUsers: [],
         connectedRef: firebase.database().ref(".info/connected"),
+        listeners: []
     }
 
     componentDidMount() {
-        const { channel, user } = this.state;
+        const { channel, user, listeners } = this.state;
 
         if(channel && user) {
+            this.removeListeners(listeners);
             this.addListeners(channel.id);
             this.addUserStarsListener(channel.id, user.uid);
         } 
@@ -48,12 +52,34 @@ class Messages extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.removeListeners(this.state.listeners);
+        this.state.connectedRef.off()
+    }  
+
+    removeListeners = listeners => {
+        listeners.forEach(listener => {
+          listener.ref.child(listener.id).off(listener.event)
+        })
+    };
+
     scrollToBottom = () => {
         const scrollHeight = this.messagesEnd.scrollHeight;
         const height = this.messagesEnd.clientHeight;
         const maxScrollTop = scrollHeight - height;
         this.messagesEnd.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     };
+
+    addToListeners = (id, ref, event) => {
+        const index = this.state.listeners.findIndex(listener => {
+          return listener.id === id && listener.ref === ref && listener.event === event
+        })
+    
+        if(index === -1) {
+          const newListener = {id, ref, event};
+          this.setState({listeners: this.state.listeners.concat(newListener)})
+        }
+    }
 
     addListeners = channelId => {
         this.addMessageListener(channelId);
@@ -72,6 +98,8 @@ class Messages extends Component {
             }
         });
 
+        this.addToListeners(channelId, this.state.typingRef, 'child_added');
+
         this.state.typingRef.child(channelId).on("child_removed", snap => {
             const index = typingUsers.findIndex(user => user.id === snap.key);
       
@@ -80,6 +108,8 @@ class Messages extends Component {
               this.setState({ typingUsers });
             }
         });
+
+        this.addToListeners(channelId, this.state.typingRef, 'child_removed');
 
         this.state.connectedRef.on("value", snap => {
             if (snap.val() === true) {
@@ -108,6 +138,12 @@ class Messages extends Component {
             });
             this.countUniqueUsers(loadedMessages);
         });
+
+        this.setState({
+            messagesLoading: false
+        });
+
+        this.addToListeners(channelId, ref, 'child_added');
     }
 
     addUserStarsListener = (channelId, userId) => {
@@ -199,14 +235,43 @@ class Messages extends Component {
     }
 
     displayMessages = messages => (
-        messages.length > 0 && messages.map(message => (
-            <Message 
-                key={message.timestamp}
-                message={message}
-                user={this.state.user}
-            />
-        ))
+        messages.length > 0 && messages.map((message, index) => {
+            const previous = messages[index-1];
+            const showDay = this.shoudlShowDay(previous, message);
+            
+            return (
+                <Message 
+                    key={message.timestamp}
+                    message={message}
+                    user={this.state.user}
+                    showDay={showDay}
+                    date={new Date(message.timestamp).toLocaleDateString()}
+                />
+            )
+        })
     )
+
+    shoudlShowDay = (previous, message) => {
+        const isFirst = !previous;
+        if (isFirst) {
+            return true;
+        }
+
+        let prevMessage = new Date(previous.timestamp);
+        let currMessage = new Date(message.timestamp);
+
+        const isNewDay = prevMessage.getDay() === currMessage.getDay()
+        return !isNewDay
+    }
+
+    displayMessagesLoading = mesagesLoading =>
+        mesagesLoading ? ( 
+            <React.Fragment>
+                {[...Array(10)].map((_, i) => (
+                    <Skeleton key={i} />
+                ))}
+            </React.Fragment>
+        ) : null;
 
     displayChannelName = channel => {
         return channel ? `${this.state.privateChannel ? '@' : '#'}${channel.name}` : '';
@@ -243,6 +308,7 @@ class Messages extends Component {
                     menuActive={menuActive}
                 />
                 <div className="messages-list" ref={node => {this.messagesEnd = node}}>
+                    {this.displayMessagesLoading(messagesLoading)}
                     { searchTerm ? 
                         this.displayMessages(searchResults) :
                         this.displayMessages(messages)

@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import formatDate from 'date-fns/format';
 
 import './Message.css';
 
@@ -11,8 +11,6 @@ const userDetails = (message, user) => {
     return message.user.id !== user.uid ? 'message__details-info info--self' : 'message__details-info info--other'
 }
 
-const timeFromNow = timestamp => moment(timestamp).fromNow();
-
 const isImage = (message) => {
     return message.hasOwnProperty('image') && !message.hasOwnProperty('content');
 }
@@ -21,9 +19,24 @@ const userImage = (message, user) => {
     return message.user.id === user.uid ? 'message__details-image image--self' : 'message__details-image image--other'
 }
 
-const Message = ({ message, user }) => { 
+const convertTime = timestamp => {
+    let currentDate = new Date(timestamp);
+    return formatDate(currentDate,`h:mm '${currentDate.getHours() >= 12 ? 'PM' : 'AM'}'`)
+};
+
+
+const Message = ({ message, user, showDay, date }) => { 
     return (
-          <div className={isOwnMessage(message, user)}>
+        <div className={isOwnMessage(message, user)}>
+            {
+                showDay && (
+                    <div className="day">
+                        <div className="day__line"/>
+                        <div className="day__text">{date}</div>
+                        <div className="day__line"/>
+                    </div>
+                )
+            }
             <div className="message__container">
                 { 
                     message.user.id !== user.uid ? 
@@ -37,7 +50,7 @@ const Message = ({ message, user }) => {
                     
                     <div className={userDetails(message, user)}>
                         <div className="message__details-name">{message.user.name}</div>
-                        <div className="message__details-time">{timeFromNow(message.timestamp)}</div>
+                        <div className="message__details-time">{convertTime(message.timestamp)}</div>
                     </div> 
                     
                     { isImage(message) ? 
