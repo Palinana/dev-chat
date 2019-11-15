@@ -10,6 +10,9 @@ import './SideMenu.css';
 class SideMenu extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            activeChannel: ''
+        }
     
         this.setWrapperRef = this.setWrapperRef.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -34,15 +37,20 @@ class SideMenu extends Component {
             this.props.handleMenu()
         }
     }
+
+    setActiveChannel = channel => {
+        this.setState({ activeChannel: channel });
+    }
+
     render() {
         const { currentUser } = this.props;
 
         return (
             <div className="side-menu" ref={this.setWrapperRef}>
                 <UserPanel currentUser={currentUser}/>
-                <Channels currentUser={currentUser}/>
+                <Channels currentUser={currentUser} activeChannel={this.state.activeChannel} setActiveChannel={this.setActiveChannel}/>
                 <Starred currentUser={currentUser} />
-                <DirectMessages currentUser={currentUser}/>
+                <DirectMessages currentUser={currentUser} activeChannel={this.state.activeChannel} setActiveChannel={this.setActiveChannel}/>
             </div>
         )
     }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import firebase from '../../firebase';
 
-import './Login.css';
+import './Auth.css';
 
 class Login extends Component {
     state = {
@@ -52,7 +52,15 @@ class Login extends Component {
 
         return (
             <div className="container">
-                <div className="form-container sign-in-container">
+                <div className="login-overlay-container">
+                    <div className="overlay">
+                        <h1>Hello, Friend!</h1>
+                        <p>Enter your personal details and start journey with us</p>
+                        <Link to="/signup"><button className="btn__auth" id="signUp">Sign Up</button></Link>
+                    </div>
+                </div>
+                
+                <div className="login-container">
                     <form className="form" onSubmit={this.handleSubmit}>
                         <h1 className="form__title">Login</h1>
                         <div className="social-container">
@@ -83,19 +91,11 @@ class Login extends Component {
                                 {this.displayErrors(errors)}
                             </div>
                         )}
+                        <div className="btn__auth--mobile">New user? <Link to="/signup">Sign Up</Link></div>
+            
                         <a href="#" className="link__password">Forgot your password?</a>
                         <button className="btn__auth--main">Login</button>
                     </form>
-                </div>
-
-                <div className="sign-in-overlay-container">
-                    <div className="overlay">
-                        <div className="overlay-panel overlay-left">
-                            <h1>Hello, Friend!</h1>
-                            <p>Enter your personal details and start journey with us</p>
-                            <Link to="/signup"><button className="btn__auth" id="signUp">Sign Up</button></Link>
-                        </div>
-                    </div>
                 </div>
             </div>
         )

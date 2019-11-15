@@ -23,20 +23,25 @@ class UserPanel extends Component {
         isLoading: false
     }
 
-    dropdownOprions = () => [
+    dropdownOptions = () => [
         {
-            key: 'user',
-            text: <span disabled="disabled">Sign in as <strong>{this.state.user.displayName}</strong></span>,
+          key: "user",
+          text: (
+            <span>
+              Signed in as <strong> {this.state.user.displayName}</strong>
+            </span>
+          ),
+          disabled: true
         },
         {
-            key: 'avatar',
-            text: <span onClick={this.openModal}>Change Avatar</span>
+          key: "avatar",
+          text: <span onClick={this.openModal}>Change Avatar</span>
         },
         {
-            key: 'logout',
-            text: <span onClick={this.handleLogout}>Logout</span>
-        } 
-    ]
+          key: "signout",
+          text: <span onClick={this.handleLogout}>Sign Out</span>
+        }
+    ];
 
     uploadCroppedImage = () => {
         const { storageRef, userRef, blob, metadata } = this.state;
@@ -116,15 +121,15 @@ class UserPanel extends Component {
         return (
             <div className="user-panel">
                 <h1 className="user-panel__title">DevChat</h1>
-                <Dropdown 
-                    trigger={
-                        <span className="user-panel__user">
-                            <Image src={user.photoURL} spaced="right" avatar/>
-                            {user.displayName}
-                        </span>
-                    } 
-                    options={this.dropdownOprions()}
-                    className="user-panel__toggle"
+                <Dropdown
+                  trigger={
+                    <span>
+                      <Image src={user.photoURL} spaced="right" avatar />
+                      {user.displayName}
+                    </span>
+                  }
+                  options={this.dropdownOptions()}
+                  className="user-panel__toggle"
                 />
 
                 <Modal basic open={modal} onClose={this.closeModal}>

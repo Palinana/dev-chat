@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import firebase from '../../firebase';
 import md5 from 'md5';
 
-import './Signup.css'
+import './Auth.css'
 
 class Signup extends Component {
     state = {
@@ -109,19 +109,9 @@ class Signup extends Component {
 
         return ( 
             <div className="container">
-                <div className="overlay-container">
-                    <div className="overlay">
-                        <div className="overlay-panel overlay-right">
-                            <h1 className="overlay__title">Welcome Back!</h1>
-                            <p>To keep connected with us please login with your personal info</p>
-                            <Link to="/login"><button className="btn__auth" id="signIn">Login</button></Link>
-                        </div>
-                    </div>
-                </div>
-                
-                <div className="form-container sign-up-container">
+                <div className="sign-up-container">
                     <form className="form" onSubmit={this.handleSubmit}>
-                        <h1>Create Account</h1>
+                        <h1 className="form__title">Create Account</h1>
                         <div className="social-container">
                             <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
                             <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
@@ -165,9 +155,21 @@ class Signup extends Component {
                                 {this.displayErrors(errors)}
                             </div>
                         )}
+                        <div className="btn__auth--mobile">Have an account? <Link to="/login">Login</Link></div>
+
                         <button className="btn__auth--main" id="signup">Sign Up</button>
                     </form>
-                </div>        
+                </div>    
+
+                <div className="sign-up-overlay-container">
+                    <div className="overlay">
+                        <div className="overlay-panel overlay-right">
+                            <h1 className="overlay__title">Welcome Back!</h1>
+                            <p>To keep connected with us please login with your personal info</p>
+                            <Link to="/login"><button className="btn__auth" id="signIn">Login</button></Link>
+                        </div>
+                    </div>
+                </div>    
             </div>
         )
     }
