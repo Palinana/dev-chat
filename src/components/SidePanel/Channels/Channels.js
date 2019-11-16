@@ -7,7 +7,7 @@ import { setCurrentChannel, setPrivateChannel } from '../../../store';
 
 import './Channels.css';
 
-class Channels extends Component {
+export class Channels extends Component {
     state = {
         user: this.props.currentUser,
         channels: [],

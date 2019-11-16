@@ -11,7 +11,7 @@ import firebase from '../../firebase';
 
 import './Messages.css';
 
-class Messages extends Component {
+export class Messages extends Component {
     state = {
         privateChannel: this.props.isPrivateChannel,
         privateMessagesRef: firebase.database().ref('privateMessages'),
