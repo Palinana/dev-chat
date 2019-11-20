@@ -1,4 +1,13 @@
 # dev-chat
+Real time web chat application with Firebase, React and Redux. 
+
+## Installation
+```
+git clone https://github.com/Palinana/dev-chat.git
+cd dev-chat
+npm install
+npm start
+```
 
 ## Technologies
 <b>Front-end:</b> Redux, React<br/>
