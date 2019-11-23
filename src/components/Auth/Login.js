@@ -5,7 +5,7 @@ import firebase from '../../firebase';
 
 import './Auth.css';
 
-class Login extends Component {
+export class Login extends Component {
     state = {
         email: '',
         password: '',

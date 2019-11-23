@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './MessagesHeader.css';
 
-class MessagesHeader extends Component {
+export class MessagesHeader extends Component {
     render() {
         const { channelName, numUniqueUsers, channelMessages, handleSearchChange, 
             searchLoading, isPrivateChannel, handleStar, isChannelStarred, menuActive, handleMenu } = this.props;

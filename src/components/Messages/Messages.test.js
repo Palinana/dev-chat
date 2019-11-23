@@ -58,7 +58,7 @@ describe('Messages component', () => {
     it('should have messages on state', () => {
         // console.log(wrapper.debug()) 
         // console.log(wrapper.state()); 
-        // const instance = wrapper.instance();
+        const instance = wrapper.instance();
         // console.log('instance',instance) 
         expect(wrapper.state().messages.length).toEqual(2);
     });
@@ -101,5 +101,22 @@ describe('Messages component', () => {
     it('should render <MessageForm/> component', () => {
         expect(wrapper.find(MessageForm).exists()).toBeTruthy();
     });
+
+    describe('checking the behavior of the search form ', () => { 
+        let testSearch = 'one';
+
+        beforeEach(() => {     
+            const instance = wrapper.instance();
+            instance.handleSearchChange({ target: { value: 'one' } })
+        }); 
+
+        it('updates the searchTerm in state', () => {
+            expect(wrapper.state().searchTerm).toEqual(testSearch);
+        });
+
+        it('show add filtered results from messages to the searchResults in state', () => {
+            expect(wrapper.state().searchResults[0].content).toEqual('message one');
+        });
+    })
     
 });
