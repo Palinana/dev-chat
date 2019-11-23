@@ -7,7 +7,7 @@ import { setCurrentChannel, setPrivateChannel } from '../../../store';
 
 import './Starred.css';
 
-class Starred extends Component {
+export class Starred extends Component {
     state = {
         user: this.props.currentUser,
         usersRef: firebase.database().ref('users'),
@@ -67,7 +67,8 @@ class Starred extends Component {
 
     render() {
         const { starredChannels, activeChannel } = this.state;
-
+        // console.log('this.state ', this.state); 
+        // console.log('this.props', this.props); 
         return (
             <div>
                 <div className="starred__header">

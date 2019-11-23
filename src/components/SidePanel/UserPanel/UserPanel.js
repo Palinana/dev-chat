@@ -6,7 +6,7 @@ import firebase from '../../../firebase';
 
 import './UserPanel.css';
 
-class UserPanel extends Component {
+export class UserPanel extends Component {
     state = {
         user: this.props.currentUser,
         modal: false,
@@ -118,6 +118,7 @@ class UserPanel extends Component {
 
     render() {
         const { user, modal, previewImage, croppedImage } = this.state;
+
         return (
             <div className="user-panel">
                 <h1 className="user-panel__title">DevChat</h1>

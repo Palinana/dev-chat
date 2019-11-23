@@ -9,7 +9,7 @@ import FileModal from './FileModal';
 
 import './MessageForm.css';
 
-class MessageForm extends Component {
+export class MessageForm extends Component {
     state = {
         message: '',
         channel: this.props.currentChannel,
@@ -198,50 +198,48 @@ class MessageForm extends Component {
 
     render() {
         const { errors, message, loading, modal, uploadState, emojiPicker } = this.state;
+        
         return (
             <div className="reply-container">
-                <form className="reply__form" onSubmit={this.handleSubmit}>
-                
-
-                        
-                        <div className="reply__form-container">
-                            <button className="reply__attach" onClick={this.openModal} type="button" disabled={uploadState === 'uploading'}>
-                                <img alt="send-icon" className="reply__attach-image" src={require('../../Assets/Images/clip.svg')} />
-                            </button>
-                            <label className="reply__label">
-                                <FileModal 
-                                    modal={modal}
-                                    closeModal={this.closeModal}
-                                    uploadFile={this.uploadFile}
+                <form className="reply__form" onSubmit={this.handleSubmit}>                
+                    <div className="reply__form-container">
+                        <button className="reply__attach" onClick={this.openModal} type="button" disabled={uploadState === 'uploading'}>
+                            <img alt="send-icon" className="reply__attach-image" src={require('../../Assets/Images/clip.svg')} />
+                        </button>
+                        <label className="reply__label">
+                            <FileModal 
+                                modal={modal}
+                                closeModal={this.closeModal}
+                                uploadFile={this.uploadFile}
+                            />
+                            {emojiPicker && (
+                                <Picker
+                                    set="apple"
+                                    className="emojipicker"
+                                    onSelect={this.handleAddEmoji}
+                                    title="Pick your emoji"
+                                    emoji="point_up"
                                 />
-                                {emojiPicker && (
-                                    <Picker
-                                        set="apple"
-                                        className="emojipicker"
-                                        onSelect={this.handleAddEmoji}
-                                        title="Pick your emoji"
-                                        emoji="point_up"
-                                    />
-                                )}
-                                <input 
-                                    type="text" 
-                                    name="message"
-                                    placeholder="Write your message" 
-                                    value={message}
-                                    onChange={this.handleChange}
-                                    onKeyDown={this.handleKeyDown}
-                                    ref={node => (this.messageInputRef = node)}
-                                />
-                            </label>
-                            <button 
-                                className="emoji__btn" 
-                                disabled={loading} 
-                                type="button"
-                                onClick={this.handleTogglePicker}
-                            >
-                                <img alt="send-icon" className="emoji__btn--submit-image" src={require('../../Assets/Images/smile.svg')} />
-                            </button>
-                        </div>
+                            )}
+                            <input 
+                                type="text" 
+                                name="message"
+                                placeholder="Write your message" 
+                                value={message}
+                                onChange={this.handleChange}
+                                onKeyDown={this.handleKeyDown}
+                                ref={node => (this.messageInputRef = node)}
+                            />
+                        </label>
+                        <button 
+                            className="emoji__btn" 
+                            disabled={loading} 
+                            type="button"
+                            onClick={this.handleTogglePicker}
+                        >
+                            <img alt="send-icon" className="emoji__btn--submit-image" src={require('../../Assets/Images/smile.svg')} />
+                        </button>
+                    </div>
                 </form>
             </div>
         )

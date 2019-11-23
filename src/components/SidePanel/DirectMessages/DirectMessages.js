@@ -8,7 +8,7 @@ import firebase from '../../../firebase';
 
 import './DirectMessages.css';
 
-class DirectMessages extends Component {
+export class DirectMessages extends Component {
     state = {
         user: this.props.currentUser,
         users: [],
