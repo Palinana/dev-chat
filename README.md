@@ -10,7 +10,7 @@ npm start
 ```
 
 ## Technologies
-<b>Front-end:</b> Redux, React<br/>
+<b>Front-end:</b> React, CSS, HTML<br/>
 <b>Back-end:</b> Node.js, Firebase, Firestore<br/>
 <b>Testing:</b> Jest, Enzyme<br/>
 
