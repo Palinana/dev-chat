@@ -1,13 +1,14 @@
 .messages__header {
     background-color: #eee;
     display: flex;
-    padding: 10px 2.5rem;
+    padding: 2px 2.5rem !important;
 }
 
 .messages__header-info {
     display: flex;
     flex-direction: column;
     margin-right: auto;
+    justify-content: center;
 }
 
 .messages__header-info__stats {
@@ -67,7 +68,7 @@ input:focus {
 .messages__header__search--btn {
     border: none;
     position: absolute;
-    top: 10px;
+    top: 18px;
     right: 10px;
     font-size: 15px;
     background: white;
@@ -172,7 +173,9 @@ input:focus {
 
 @media only screen and (max-width: 990px) {
 	.messages__header-menu--hidden {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-right: 2.5rem;
         font-size: 3rem;
 	}
