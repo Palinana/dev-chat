@@ -1,5 +1,5 @@
 # dev-chat
-Real time web chat application with Firebase, React and Redux. 
+Real time web chat application build with Firebase, React and Redux. 
 
 ## Installation
 ```
