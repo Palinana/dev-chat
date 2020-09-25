@@ -13,7 +13,7 @@ npm start
 <b>Front-end:</b> React, CSS, HTML<br/>
 <b>Back-end:</b> Node.js, Firebase, Firestore<br/>
 <b>Testing:</b> Jest, Enzyme<br/>
-
+<br/>
 
 ![image](https://user-images.githubusercontent.com/26104823/69076154-dfd86500-0a00-11ea-8147-7f189910a7ff.png)
 <br/>
